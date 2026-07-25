@@ -11,6 +11,8 @@ import { giftRoutes } from "./routes/gifts.js";
 import { redemptionOrderRoutes } from "./routes/redemptionOrders.js";
 import { adminRoutes } from "./routes/admin.js";
 import { storageRoutes } from "./routes/storage.js";
+import { metricsRoutes } from "./routes/metrics.js";
+import { recordRequest, startCpuSampler } from "./metrics/collector.js";
 
 const app = Fastify({ logger: true }).withTypeProvider<ZodTypeProvider>();
 app.setValidatorCompiler(validatorCompiler);
@@ -21,6 +23,14 @@ await app.register(multipart, { limits: { fileSize: 10 * 1024 * 1024, files: 1 }
 await app.register(authPlugin);
 
 app.get("/health", async () => ({ ok: true }));
+
+// Feeds the rolling requests-per-hour figure behind GET /metrics. Both ops
+// endpoints are excluded so dashboard polling and health checks don't register
+// as app traffic.
+startCpuSampler();
+app.addHook("onResponse", async (req) => {
+  if (req.url !== "/metrics" && req.url !== "/health") recordRequest();
+});
 
 // Postgres error codes the redeem_cart/credit_points_for_receipt functions
 // and unique constraints (e.g. one-upload-per-content-hash) actually raise,
@@ -51,6 +61,7 @@ await app.register(giftRoutes);
 await app.register(redemptionOrderRoutes);
 await app.register(adminRoutes);
 await app.register(storageRoutes);
+await app.register(metricsRoutes);
 
 app.listen({ port: env.PORT, host: "0.0.0.0" }).catch((err) => {
   app.log.error(err);
