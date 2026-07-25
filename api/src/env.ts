@@ -20,4 +20,8 @@ export const env = {
   AWS_REGION: process.env.AWS_REGION ?? "us-east-1",
   AWS_ACCESS_KEY_ID: required("AWS_ACCESS_KEY_ID"),
   AWS_SECRET_ACCESS_KEY: required("AWS_SECRET_ACCESS_KEY"),
+  // Bearer token for the ops-only GET /metrics endpoint. Intentionally NOT
+  // required: when unset the route answers 503 and the rest of the API boots
+  // normally, so a missing ops secret can't take a deploy down.
+  METRICS_TOKEN: process.env.METRICS_TOKEN ?? "",
 };
