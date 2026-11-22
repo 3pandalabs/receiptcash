@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { WordmarkTag } from "@/components/Wordmark";
 
 export default function Home() {
   return (
@@ -6,6 +7,7 @@ export default function Home() {
       <header className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-6">
         <span className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
           ReceiptCash
+          <WordmarkTag />
         </span>
         <Link
           href="/login"

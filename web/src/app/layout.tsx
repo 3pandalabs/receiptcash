@@ -12,9 +12,33 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const description = "Scan your receipts, earn cashback, redeem for gifts.";
+const homeTitle = "ReceiptCash — Scan receipts, earn cashback | by 3PandaLabs";
+
+// Brand consistency rules (brand repo, brand.md, DECIDED 2026-11-22): home
+// title "<App> — <line> | by 3PandaLabs", other pages "<Page> — <App>" via
+// the template, and share tags with a 1200x630 /og.png.
 export const metadata: Metadata = {
-  title: "ReceiptCash",
-  description: "Scan your receipts, earn cashback, redeem for gifts.",
+  metadataBase: new URL("https://receiptcash.3pandalabs.com"),
+  title: {
+    default: homeTitle,
+    template: "%s — ReceiptCash",
+  },
+  description,
+  openGraph: {
+    title: homeTitle,
+    description,
+    siteName: "ReceiptCash by 3PandaLabs",
+    type: "website",
+    url: "/",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "ReceiptCash by 3PandaLabs" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: homeTitle,
+    description,
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({
@@ -32,6 +56,7 @@ export default function RootLayout({
         <footer className="mx-auto w-full max-w-5xl px-6 py-8 text-center text-sm text-zinc-500">
           <p>&copy; 3PandaLabs LLC, USA.</p>
           <p>All rights reserved.</p>
+          <p className="mt-1 text-xs">Built by pandas. Loved by people.</p>
         </footer>
       </body>
     </html>

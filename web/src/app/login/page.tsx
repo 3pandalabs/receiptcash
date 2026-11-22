@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { WordmarkTag } from "@/components/Wordmark";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { loginAction, signupAction } from "./actions";
@@ -39,9 +40,10 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-zinc-50 px-6 dark:bg-black">
-      <Link href="/" className="mb-8 text-lg font-semibold text-zinc-900 dark:text-zinc-50">
-        ReceiptCash
-      </Link>
+      <span className="mb-8 text-lg font-semibold text-zinc-900 dark:text-zinc-50">
+        <Link href="/">ReceiptCash</Link>
+        <WordmarkTag />
+      </span>
 
       <form
         onSubmit={handleSubmit}
