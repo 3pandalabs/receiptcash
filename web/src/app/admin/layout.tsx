@@ -1,6 +1,9 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { apiGetCurrentUser } from "@/lib/api/client";
+
+export const metadata: Metadata = { title: "Admin" };
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const user = await apiGetCurrentUser();

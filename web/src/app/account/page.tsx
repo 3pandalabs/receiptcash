@@ -1,7 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { apiGetBalance, apiGetCurrentUser, apiGetReceipts, apiGetRedemptionOrders } from "@/lib/api/client";
 import { signOut } from "./actions";
+
+export const metadata: Metadata = { title: "Your account" };
 
 export default async function AccountPage() {
   const user = await apiGetCurrentUser();
