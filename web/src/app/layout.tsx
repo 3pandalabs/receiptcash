@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -57,6 +58,14 @@ export default function RootLayout({
           <p>&copy; 3PandaLabs LLC, USA.</p>
           <p>All rights reserved.</p>
           <p className="mt-1 text-xs">Built by pandas. Loved by people.</p>
+          <nav aria-label="Legal" className="mt-3 flex justify-center gap-4 text-xs">
+            <Link href="/privacy" className="hover:text-zinc-700 hover:underline dark:hover:text-zinc-300">
+              Privacy
+            </Link>
+            <Link href="/terms" className="hover:text-zinc-700 hover:underline dark:hover:text-zinc-300">
+              Terms
+            </Link>
+          </nav>
         </footer>
       </body>
     </html>
