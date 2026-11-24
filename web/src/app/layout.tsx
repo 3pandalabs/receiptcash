@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { FollowUs } from "@/components/FollowUs";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -54,6 +55,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <div className="flex-1">{children}</div>
         <footer className="mx-auto w-full max-w-5xl px-6 py-8 text-center text-sm text-zinc-500">
+          <FollowUs className="mb-2 justify-center" />
           <p>&copy; 3PandaLabs LLC, USA.</p>
           <p>All rights reserved.</p>
           <p className="mt-1 text-xs">Built by pandas. Loved by people.</p>
